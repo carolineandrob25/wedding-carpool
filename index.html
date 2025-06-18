@@ -1,0 +1,442 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Caroline & Rob's Wedding Carpool Coordinator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <style>
+        .lucide-icon {
+            width: 1em;
+            height: 1em;
+            display: inline-block;
+            vertical-align: middle;
+        }
+    </style>
+</head>
+<body class="bg-gradient-to-br from-rose-50 to-pink-50 min-h-screen">
+    <div class="max-w-4xl mx-auto p-6">
+        <div class="bg-white rounded-lg shadow-lg p-8 mb-6">
+            <div class="text-center mb-8">
+                <h1 class="text-3xl font-bold text-gray-800 mb-2">Caroline & Rob's Wedding Carpool Coordinator</h1>
+                <p class="text-gray-600 mb-4">Connect with other guests to share rides from the airport to Glenwood Springs</p>
+                
+                <div class="bg-amber-50 border border-amber-200 rounded-lg p-4 text-left max-w-2xl mx-auto">
+                    <h2 class="text-lg font-semibold text-amber-800 mb-3">How to Use This Tool:</h2>
+                    <div class="space-y-2 text-sm text-amber-700">
+                        <p><strong>Step 1:</strong> Click the "Add Your Travel Plans" button below to share your flight details</p>
+                        <p><strong>Step 2:</strong> Fill out the form with your name, email, airport, and arrival time</p>
+                        <p><strong>Step 3:</strong> Choose if you're driving (offering a ride) or need a ride</p>
+                        <p><strong>Step 4:</strong> Look at the "Available Rides" section to see other guests' plans</p>
+                        <p><strong>Step 5:</strong> Click "Contact" next to someone you'd like to coordinate with</p>
+                        <p><strong>That's it!</strong> Your email will open with a message ready to send to coordinate your shared ride.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="grid md:grid-cols-3 gap-4 mb-8">
+                <div class="bg-blue-50 p-4 rounded-lg text-center">
+                    <svg class="w-6 h-6 text-blue-600 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    <h3 class="font-semibold text-gray-800">Denver International (DEN)</h3>
+                    <p class="text-sm text-gray-600">~3 hours to venue</p>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-lg text-center">
+                    <svg class="w-6 h-6 text-blue-600 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    <h3 class="font-semibold text-gray-800">Eagle County Regional (EGE)</h3>
+                    <p class="text-sm text-gray-600">~45 minutes to venue</p>
+                </div>
+                <div class="bg-blue-50 p-4 rounded-lg text-center">
+                    <svg class="w-6 h-6 text-blue-600 mx-auto mb-2" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                    </svg>
+                    <h3 class="font-semibold text-gray-800">Aspen/Pitkin County (ASE)</h3>
+                    <p class="text-sm text-gray-600">~1 hour to venue</p>
+                </div>
+            </div>
+
+            <div class="text-center mb-8">
+                <button
+                    onclick="toggleForm()"
+                    id="formToggleBtn"
+                    class="bg-rose-600 text-white px-6 py-3 rounded-lg hover:bg-rose-700 transition-colors inline-flex items-center gap-2"
+                >
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                    </svg>
+                    Add Your Travel Plans
+                </button>
+            </div>
+
+            <div id="formSection" class="bg-gray-50 p-6 rounded-lg mb-8 hidden">
+                <h2 class="text-xl font-semibold mb-4">Share Your Travel Details</h2>
+                <div class="space-y-4">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Name *</label>
+                            <input
+                                type="text"
+                                id="name"
+                                required
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-rose-500"
+                            />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Email *</label>
+                            <input
+                                type="email"
+                                id="email"
+                                required
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-rose-500"
+                            />
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Phone</label>
+                            <input
+                                type="tel"
+                                id="phone"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-rose-500"
+                            />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Airport *</label>
+                            <select
+                                id="airport"
+                                required
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-rose-500"
+                            >
+                                <option value="">Select Airport</option>
+                                <option value="DEN">Denver International (DEN)</option>
+                                <option value="EGE">Eagle County Regional (EGE)</option>
+                                <option value="ASE">Aspen/Pitkin County (ASE)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="grid md:grid-cols-3 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Date *</label>
+                            <input
+                                type="date"
+                                id="date"
+                                required
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-rose-500"
+                            />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">Time *</label>
+                            <input
+                                type="time"
+                                id="time"
+                                required
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-rose-500"
+                            />
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium text-gray-700 mb-1">I'm a... *</label>
+                            <select
+                                id="type"
+                                onchange="handleTypeChange()"
+                                class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-rose-500"
+                            >
+                                <option value="driver">Driver (offering ride)</option>
+                                <option value="passenger">Passenger (need ride)</option>
+                                <option value="flexible">Flexible (either)</option>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div id="seatsSection">
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Available Seats</label>
+                        <select
+                            id="seats"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-rose-500"
+                        >
+                            <option value="1">1 seat</option>
+                            <option value="2">2 seats</option>
+                            <option value="3">3 seats</option>
+                            <option value="4">4+ seats</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <label class="block text-sm font-medium text-gray-700 mb-1">Notes (optional)</label>
+                        <textarea
+                            id="notes"
+                            rows="3"
+                            placeholder="Any additional details (e.g., preferred stops, luggage space, etc.)"
+                            class="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-rose-500"
+                        ></textarea>
+                    </div>
+
+                    <button
+                        onclick="addRide()"
+                        class="w-full bg-rose-600 text-white py-3 rounded-md hover:bg-rose-700 transition-colors"
+                    >
+                        Add My Travel Plans
+                    </button>
+                </div>
+            </div>
+
+            <div class="space-y-6">
+                <h2 class="text-2xl font-semibold text-gray-800">Available Rides</h2>
+                
+                <div id="ridesContainer">
+                    <div class="text-center py-12 text-gray-500">
+                        <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/>
+                        </svg>
+                        <p>No rides posted yet. Be the first to share your travel plans!</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="mt-8 p-4 bg-blue-50 rounded-lg">
+                <h3 class="font-semibold text-blue-800 mb-2">Privacy & Safety Tips</h3>
+                <ul class="text-sm text-blue-700 space-y-1">
+                    <li>• Only your name and the details you choose to share are visible to other guests</li>
+                    <li>• Contact information is only shared when someone clicks to reach out</li>
+                    <li>• Always verify the identity of people you're carpooling with</li>
+                    <li>• Consider meeting in a public place at the airport before departing</li>
+                    <li>• Share your travel plans with someone not attending the wedding</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        let rides = [];
+        let showForm = false;
+
+        const airports = {
+            'DEN': { name: 'Denver International (DEN)', distance: '~3 hours' },
+            'EGE': { name: 'Eagle County Regional (EGE)', distance: '~45 minutes' },
+            'ASE': { name: 'Aspen/Pitkin County (ASE)', distance: '~1 hour' }
+        };
+
+        function toggleForm() {
+            showForm = !showForm;
+            const formSection = document.getElementById('formSection');
+            const toggleBtn = document.getElementById('formToggleBtn');
+            
+            if (showForm) {
+                formSection.classList.remove('hidden');
+                toggleBtn.innerHTML = `
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+                    </svg>
+                    Cancel
+                `;
+            } else {
+                formSection.classList.add('hidden');
+                toggleBtn.innerHTML = `
+                    <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 6v6m0 0v6m0-6h6m-6 0H6"/>
+                    </svg>
+                    Add Your Travel Plans
+                `;
+            }
+        }
+
+        function handleTypeChange() {
+            const type = document.getElementById('type').value;
+            const seatsSection = document.getElementById('seatsSection');
+            
+            if (type === 'driver') {
+                seatsSection.style.display = 'block';
+            } else {
+                seatsSection.style.display = 'none';
+            }
+        }
+
+        function addRide() {
+            const name = document.getElementById('name').value;
+            const email = document.getElementById('email').value;
+            const phone = document.getElementById('phone').value;
+            const airport = document.getElementById('airport').value;
+            const date = document.getElementById('date').value;
+            const time = document.getElementById('time').value;
+            const type = document.getElementById('type').value;
+            const seats = document.getElementById('seats').value;
+            const notes = document.getElementById('notes').value;
+
+            if (!name || !email || !airport || !date || !time) {
+                alert('Please fill in all required fields');
+                return;
+            }
+
+            const newRide = {
+                id: Date.now(),
+                name,
+                email,
+                phone,
+                airport,
+                date,
+                time,
+                type,
+                seats,
+                notes,
+                createdAt: new Date().toISOString()
+            };
+
+            rides.push(newRide);
+            clearForm();
+            toggleForm();
+            renderRides();
+        }
+
+        function clearForm() {
+            document.getElementById('name').value = '';
+            document.getElementById('email').value = '';
+            document.getElementById('phone').value = '';
+            document.getElementById('airport').value = '';
+            document.getElementById('date').value = '';
+            document.getElementById('time').value = '';
+            document.getElementById('type').value = 'driver';
+            document.getElementById('seats').value = '1';
+            document.getElementById('notes').value = '';
+        }
+
+        function formatDate(dateString) {
+            return new Date(dateString).toLocaleDateString('en-US', {
+                weekday: 'short',
+                month: 'short',
+                day: 'numeric'
+            });
+        }
+
+        function renderRides() {
+            const container = document.getElementById('ridesContainer');
+            
+            if (rides.length === 0) {
+                container.innerHTML = `
+                    <div class="text-center py-12 text-gray-500">
+                        <svg class="w-16 h-16 mx-auto mb-4 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"/>
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/>
+                        </svg>
+                        <p>No rides posted yet. Be the first to share your travel plans!</p>
+                    </div>
+                `;
+                return;
+            }
+
+            // Group rides by airport and date
+            const groupedRides = {};
+            rides.forEach(ride => {
+                const key = `${ride.airport}-${ride.date}`;
+                if (!groupedRides[key]) {
+                    groupedRides[key] = [];
+                }
+                groupedRides[key].push(ride);
+            });
+
+            let html = '';
+            Object.entries(groupedRides).forEach(([key, rideGroup]) => {
+                const [airport, date] = key.split('-');
+                const airportInfo = airports[airport];
+                
+                html += `
+                    <div class="bg-white border rounded-lg p-6 mb-4">
+                        <div class="flex items-center gap-3 mb-4 pb-3 border-b">
+                            <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+                            </svg>
+                            <h3 class="text-lg font-semibold">${airportInfo.name}</h3>
+                            <span class="text-gray-500">•</span>
+                            <span class="text-gray-600">${formatDate(date)}</span>
+                        </div>
+                        
+                        <div class="space-y-4">
+                `;
+                
+                rideGroup.forEach(ride => {
+                    const typeColors = {
+                        driver: 'bg-green-100 text-green-700',
+                        passenger: 'bg-blue-100 text-blue-700',
+                        flexible: 'bg-purple-100 text-purple-700'
+                    };
+                    
+                    const typeLabels = {
+                        driver: `Offering ride (${ride.seats} seats available)`,
+                        passenger: 'Looking for ride',
+                        flexible: 'Flexible (driver or passenger)'
+                    };
+                    
+                    html += `
+                        <div class="bg-gray-50 rounded-lg p-4">
+                            <div class="flex items-start justify-between mb-3">
+                                <div class="flex items-center gap-3">
+                                    <div class="p-2 rounded-full ${typeColors[ride.type]}">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            ${ride.type === 'passenger' ? 
+                                                '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197m13.5-9a2.5 2.5 0 11-5 0 2.5 2.5 0 015 0z"/>' :
+                                                '<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 17a2 2 0 11-4 0 2 2 0 014 0zM19 17a2 2 0 11-4 0 2 2 0 014 0z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16V6a1 1 0 00-1-1H4a1 1 0 00-1 1v10a1 1 0 001 1h1m8-1a1 1 0 01-1 1H9m4-1V8a1 1 0 011-1h2.586a1 1 0 01.707.293l2.414 2.414a1 1 0 01.293.707V16a1 1 0 01-1 1h-1m-6-1a1 1 0 001 1h1M5 17a2 2 0 104 0m-4 0a2 2 0 114 0m6 0a2 2 0 104 0m-4 0a2 2 0 114 0"/>'
+                                            }
+                                        </svg>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-semibold text-gray-800">${ride.name}</h4>
+                                        <p class="text-sm text-gray-600">${typeLabels[ride.type]}</p>
+                                    </div>
+                                </div>
+                                <div class="text-right">
+                                    <div class="flex items-center gap-1 text-gray-600 mb-1">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z"/>
+                                        </svg>
+                                        <span class="text-sm">${ride.time}</span>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            ${ride.notes ? `<p class="text-sm text-gray-600 mb-3 italic">"${ride.notes}"</p>` : ''}
+                            
+                            <div class="flex items-center gap-4 text-sm">
+                                <a
+                                    href="mailto:${ride.email}?subject=Wedding Carpool - ${airportInfo.name} on ${formatDate(ride.date)}"
+                                    class="bg-rose-600 text-white px-4 py-2 rounded-md hover:bg-rose-700 transition-colors inline-flex items-center gap-2"
+                                >
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12h.01M12 12h.01M16 12h.01M21 12c0 4.418-4.03 8-9 8a9.863 9.863 0 01-4.255-.949L3 20l1.395-3.72C3.512 15.042 3 13.574 3 12c0-4.418 4.03-8 9-8s9 3.582 9 8z"/>
+                                    </svg>
+                                    Contact
+                                </a>
+                                ${ride.phone ? `
+                                    <a
+                                        href="tel:${ride.phone}"
+                                        class="text-blue-600 hover:text-blue-800 transition-colors"
+                                    >
+                                        Call/Text
+                                    </a>
+                                ` : ''}
+                            </div>
+                        </div>
+                    `;
+                });
+                
+                html += `
+                        </div>
+                    </div>
+                `;
+            });
+            
+            container.innerHTML = html;
+        }
+
+        // Initialize the page
+        handleTypeChange();
+    </script>
+</body>
+</html>
